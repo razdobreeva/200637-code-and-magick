@@ -1,5 +1,6 @@
 'use strict';
 
+  /*[sum] - сумма значений переданного массива*/
 function calculateSteps (a) {
   var sum = 0;
   for (var i = 0; i < a.length; i++) {
@@ -7,13 +8,14 @@ function calculateSteps (a) {
   }
   return sum;
 }
-
+/*[distance] - сумма произведений
+соответствующих элементов массивов a и b,
+cумма произведения первого элемента a с первым элементом b,
+второго со вторым и так далее*/
 function calculateDistance (a, b) {
   var distance = 0;
   for (var i = 0; i < a.length; i++) {
-    for (var j = 0; j < b.length; j++) {
-      distance += a[i]*b[j];
-    }
+      distance += a[i]*b[i];
   }
   return distance;
 }
@@ -28,17 +30,12 @@ function getMessage(a, b) {
     }
   }
   else if (typeof a === 'number') {
-    return 'Я прыгнул на ' + a*100 + ' см';
+    return 'Я прыгнул на ' + a*100 + ' сантиметров';
   }
   else if (typeof a === 'object' && typeof b === 'object') {
-    return 'Я прошел ' + calculateDistance (a, b) + ' метров';
-    //[length] - сумма произведений
-    //соответствующих элементов массивов a и b,
-    //cумма произведения первого элемента a с первым элементом b,
-    //второго со вторым и так далее
+    return 'Я прошёл ' + calculateDistance(a, b) + ' метров';
   }
   else if (typeof a === 'object') {
-    return 'Я прошел ' + calculateSteps(a) + ' шагов';
-    //[sum] - сумма значений переданного массива
+    return 'Я прошёл ' + calculateSteps(a) + ' шагов';
   }
 }
