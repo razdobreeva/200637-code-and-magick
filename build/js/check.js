@@ -32,10 +32,10 @@ function getMessage(a, b) {
   else if (typeof a === 'number') {
     return 'Я прыгнул на ' + a*100 + ' сантиметров';
   }
-  else if (typeof a === 'object' && typeof b === 'object') {
+  else if (Array.isArray(a) && Array.isArray(b)) {
     return 'Я прошёл ' + calculateDistance(a, b) + ' метров';
   }
-  else if (typeof a === 'object') {
+  else if (Array.isArray(a)) {
     return 'Я прошёл ' + calculateSteps(a) + ' шагов';
   }
 }
