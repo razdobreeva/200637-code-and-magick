@@ -1,6 +1,6 @@
 'use strict';
 
-  /*[sum] - сумма значений переданного массива.*/
+  /*[sum] - сумма значений переданного массива*/
 function calculateSteps (a) {
   var sum = 0;
   for (var i = 0; i < a.length; i++) {
@@ -11,7 +11,7 @@ function calculateSteps (a) {
 /*[distance] - сумма произведений
 соответствующих элементов массивов a и b,
 cумма произведения первого элемента a с первым элементом b,
-второго со вторым и так далее.*/
+второго со вторым и так далее*/
 function calculateDistance (a, b) {
   var distance = 0;
   for (var i = 0; i < a.length; i++) {
