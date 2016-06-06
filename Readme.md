@@ -1,7 +1,7 @@
 # Личный проект «Код и Магия» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Анастасия Раздобреева](https://up.htmlacademy.ru/javascript/5/user/200637).
-* Наставник: `Евгений Лепёшкин`.
+* Наставник: `Неизвестно`.
 
 ---
 
