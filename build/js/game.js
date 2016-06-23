@@ -402,13 +402,13 @@
           //this.ctx.lineTo(185, 155);
           //this.ctx.lineTo(200, 20);
 
-          this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.shadowOffsetX = 10;
-          this.ctx.shadowOffsetY = 10;
+          //this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+          //this.ctx.shadowOffsetX = 10;
+          //this.ctx.shadowOffsetY = 10;
           this.ctx.fill();
 
           this.ctx.font = '16px PT Mono';
-          this.ctx.textColor = 'black';
+          this.ctx.fillStyle = 'black';
           this.ctx.textBaseline = 'hanging';
           this.ctx.fillText('Вы выиграли о_О', 225, 40);
           this.ctx.fillText('Принимайте поздравления!', 225, 60);
