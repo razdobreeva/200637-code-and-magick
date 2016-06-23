@@ -391,27 +391,18 @@
           this.ctx.lineTo(210, 155);
           this.ctx.lineTo(225, 20);
 
-          //ObjectType.ME.x = 1;
-
-          // WIDTH / 3,
-          //y: HEIGHT - 100
-
-          //this.ctx.moveTo(WIDTH / 3 + 165, HEIGHT - 280);
-          //this.ctx.lineTo(430, 20);
-          //this.ctx.lineTo(430, 140);
-          //this.ctx.lineTo(185, 155);
-          //this.ctx.lineTo(200, 20);
-
-          //this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-          //this.ctx.shadowOffsetX = 10;
-          //this.ctx.shadowOffsetY = 10;
+          this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.shadowOffsetX = 10;
+          this.ctx.shadowOffsetY = 10;
           this.ctx.fill();
+          this.ctx.shadowOffsetX = 0;
+          this.ctx.shadowOffsetY = 0;
 
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = 'black';
           this.ctx.textBaseline = 'hanging';
-          this.ctx.fillText('Вы выиграли о_О', 225, 40);
-          this.ctx.fillText('Принимайте поздравления!', 225, 60);
+          this.ctx.fillText('Вы выиграли о_О', 235, 40);
+          this.ctx.fillText('Принимайте поздравления!', 235, 60);
 
           console.log('you have won!');
           break;
