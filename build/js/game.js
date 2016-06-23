@@ -380,8 +380,9 @@
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN: {
-          //this.canvas = document.createElement('canvas');
-          //this.canvas = document.querySelector('canvas'); // DOM-элемент канваса
+          var message = ['Вы стали на шаг ближе к', 'завоеванию мира! Грац!'];
+          var initialY = 40;
+
           this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
           this.ctx.fillStyle = '#FFFFFF';
           this.ctx.beginPath();
@@ -401,8 +402,11 @@
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = 'black';
           this.ctx.textBaseline = 'hanging';
-          this.ctx.fillText('Вы выиграли о_О', 235, 40);
-          this.ctx.fillText('Принимайте поздравления!', 235, 60);
+
+          for (var i = 0; i < message.length; i++) {
+            this.ctx.fillText(message[i], 235, initialY);
+            initialY = initialY + 20;
+          }
 
           console.log('you have won!');
           break;
