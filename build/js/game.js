@@ -374,40 +374,46 @@
       }
     },
 
+    writeMessage: function(messageText, messageWidth) {
+      var message = ['Я стал на шаг ближе к', 'завоеванию мира! Ура!'];
+      var initialY = 40;
+
+      this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
+      this.ctx.fillStyle = '#FFFFFF';
+      this.ctx.beginPath();
+      this.ctx.moveTo(WIDTH / 2 - messageWidth / 2, 20);
+      this.ctx.lineTo(WIDTH / 2 + messageWidth / 2, 20);
+      this.ctx.lineTo(WIDTH / 2 + messageWidth / 2, 140);
+      this.ctx.lineTo(WIDTH / 2 - messageWidth / 2 - 15, 155);
+      this.ctx.lineTo(WIDTH / 2 - messageWidth / 2, 20);
+
+      this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.shadowOffsetX = 10;
+      this.ctx.shadowOffsetY = 10;
+      this.ctx.fill();
+      this.ctx.shadowOffsetX = 0;
+      this.ctx.shadowOffsetY = 0;
+
+      this.ctx.font = '16px PT Mono';
+      this.ctx.fillStyle = 'black';
+      this.ctx.textBaseline = 'hanging';
+
+      for (var i = 0; i < message.length; i++) {
+        this.ctx.fillText(message[i], 235, initialY);
+        initialY = initialY + 20;
+      }
+    },
+
     /**
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
+      var messageWidth = 250;
+      var messageText;
       switch (this.state.currentStatus) {
         case Verdict.WIN: {
-          var message = ['Вы стали на шаг ближе к', 'завоеванию мира! Грац!'];
-          var initialY = 40;
-
-          this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.beginPath();
-          this.ctx.moveTo(225, 20);
-          this.ctx.lineTo(475, 20);
-          this.ctx.lineTo(475, 140);
-          this.ctx.lineTo(210, 155);
-          this.ctx.lineTo(225, 20);
-
-          this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.shadowOffsetX = 10;
-          this.ctx.shadowOffsetY = 10;
-          this.ctx.fill();
-          this.ctx.shadowOffsetX = 0;
-          this.ctx.shadowOffsetY = 0;
-
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = 'black';
-          this.ctx.textBaseline = 'hanging';
-
-          for (var i = 0; i < message.length; i++) {
-            this.ctx.fillText(message[i], 235, initialY);
-            initialY = initialY + 20;
-          }
-
+          messageText = 'Я стал на шаг ближе к завоеванию мира! Ура!';
+          this.writeMessage(messageText, messageWidth);
           console.log('you have won!');
           break;
         }
