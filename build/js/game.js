@@ -375,17 +375,19 @@
     },
 
     writeMessage: function(messageText, messageWidth) {
-      var message = ['Я стал на шаг ближе к', 'завоеванию мира! Ура!'];
-      var initialY = 40;
-
       this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
+      var marginTop = 40;
+      var lineHeight = 20;
+      var wrapWidth = messageWidth + 20;
+      var marginLeft = WIDTH / 2 - wrapWidth / 2 + 10;
+
       this.ctx.fillStyle = '#FFFFFF';
       this.ctx.beginPath();
-      this.ctx.moveTo(WIDTH / 2 - messageWidth / 2, 20);
-      this.ctx.lineTo(WIDTH / 2 + messageWidth / 2, 20);
-      this.ctx.lineTo(WIDTH / 2 + messageWidth / 2, 140);
-      this.ctx.lineTo(WIDTH / 2 - messageWidth / 2 - 15, 155);
-      this.ctx.lineTo(WIDTH / 2 - messageWidth / 2, 20);
+      this.ctx.moveTo(WIDTH / 2 - wrapWidth / 2, 20);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, 20);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, 140);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2 - 15, 155);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2, 20);
 
       this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
       this.ctx.shadowOffsetX = 10;
@@ -398,17 +400,28 @@
       this.ctx.fillStyle = 'black';
       this.ctx.textBaseline = 'hanging';
 
-      for (var i = 0; i < message.length; i++) {
-        this.ctx.fillText(message[i], 235, initialY);
-        initialY = initialY + 20;
+      var words = messageText.split(' ');
+      var countWords = words.length;
+      var line = '';
+      for (var i = 0; i < countWords; i++) {
+        var testLine = line + words[i] + ' ';
+        var testWidth = this.ctx.measureText(testLine).width;
+        if (testWidth > messageWidth) {
+          this.ctx.fillText(line, marginLeft, marginTop);
+          line = words[i] + ' ';
+          marginTop += lineHeight;
+        } else {
+          line = testLine;
+        }
       }
+      this.ctx.fillText(line, marginLeft, marginTop);
     },
 
     /**
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
-      var messageWidth = 250;
+      var messageWidth = 230;
       var messageText;
       switch (this.state.currentStatus) {
         case Verdict.WIN: {
