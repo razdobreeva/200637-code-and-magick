@@ -375,7 +375,7 @@
     },
 
     writeMessage: function(messageText, messageWidth) {
-      //this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
+      this.ctx.font = '16px PT Mono';
       var wrapTop = 20;
       var messageTop = wrapTop + 10;
       var lineHeight = 20;
@@ -391,7 +391,6 @@
         var testLine = line + words[i] + ' ';
         var testWidth = this.ctx.measureText(testLine).width;
         if (testWidth > messageWidth) {
-          console.log(this.ctx.measureText(line).width);
           textLine.push(line);
           countLines++;
           line = words[i] + ' ';
@@ -417,7 +416,6 @@
       this.ctx.shadowOffsetX = 0;
       this.ctx.shadowOffsetY = 0;
 
-      this.ctx.font = '16px PT Mono';
       this.ctx.fillStyle = 'black';
       this.ctx.textBaseline = 'hanging';
 
