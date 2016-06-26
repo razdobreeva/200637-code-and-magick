@@ -376,18 +376,39 @@
 
     writeMessage: function(messageText, messageWidth) {
       //this.ctx = this.canvas.getContext('2d'); // контекст отрисовки
-      var marginTop = 30;
+      var wrapTop = 20;
+      var messageTop = wrapTop + 10;
       var lineHeight = 20;
       var wrapWidth = messageWidth + 20;
       var marginLeft = WIDTH / 2 - wrapWidth / 2 + 10;
+      var countLines = 0;
+      var textLine = [];
+
+      var words = messageText.split(' ');
+      var countWords = words.length;
+      var line = '';
+      for (var i = 0; i < countWords; i++) {
+        var testLine = line + words[i] + ' ';
+        var testWidth = this.ctx.measureText(testLine).width;
+        if (testWidth > messageWidth) {
+          console.log(this.ctx.measureText(line).width);
+          textLine.push(line);
+          countLines++;
+          line = words[i] + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+      textLine.push(line);
+      countLines++;
 
       this.ctx.fillStyle = '#FFFFFF';
       this.ctx.beginPath();
-      this.ctx.moveTo(WIDTH / 2 - wrapWidth / 2, 20);
-      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, 20);
-      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, 140);
-      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2 - 15, 155);
-      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2, 20);
+      this.ctx.moveTo(WIDTH / 2 - wrapWidth / 2, wrapTop);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, wrapTop);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, wrapTop + lineHeight * countLines + 10);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2 - 15, wrapTop + lineHeight * countLines + 25);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2, wrapTop);
 
       this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
       this.ctx.shadowOffsetX = 10;
@@ -400,21 +421,10 @@
       this.ctx.fillStyle = 'black';
       this.ctx.textBaseline = 'hanging';
 
-      var words = messageText.split(' ');
-      var countWords = words.length;
-      var line = '';
-      for (var i = 0; i < countWords; i++) {
-        var testLine = line + words[i] + ' ';
-        var testWidth = this.ctx.measureText(testLine).width;
-        if (testWidth > messageWidth) {
-          this.ctx.fillText(line, marginLeft, marginTop);
-          line = words[i] + ' ';
-          marginTop += lineHeight;
-        } else {
-          line = testLine;
-        }
+      for (i = 0; i < countLines; i++) {
+        this.ctx.fillText(textLine[i], marginLeft, messageTop);
+        messageTop += lineHeight;
       }
-      this.ctx.fillText(line, marginLeft, marginTop);
     },
 
     /**
@@ -423,10 +433,10 @@
     _drawPauseScreen: function() {
       var messageWidth = 230;
       var messageText;
+
       switch (this.state.currentStatus) {
         case Verdict.WIN: {
-          messageText = 'Я умею перемещаться и летать по нажатию стрелки. А если нажать шифт, я выстрелю фейерболом. Поехали!';
-          //messageText = 'Я стал на шаг ближе к завоеванию мира! Ура!';
+          messageText = 'Я стал на шаг ближе к завоеванию мира! Ура!';
           this.writeMessage(messageText, messageWidth);
           console.log('you have won!');
           break;
