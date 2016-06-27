@@ -374,23 +374,86 @@
       }
     },
 
+    writeMessage: function(messageText, messageWidth) {
+      this.ctx.font = '16px PT Mono';
+      var wrapTop = 20;
+      var messageTop = wrapTop + 10;
+      var lineHeight = 20;
+      var wrapWidth = messageWidth + 20;
+      var marginLeft = WIDTH / 2 - wrapWidth / 2 + 10;
+      var countLines = 0;
+      var textLine = [];
+
+      var words = messageText.split(' ');
+      var countWords = words.length;
+      var line = '';
+      for (var i = 0; i < countWords; i++) {
+        var testLine = line + words[i] + ' ';
+        var testWidth = this.ctx.measureText(testLine).width;
+        if (testWidth > messageWidth) {
+          textLine.push(line);
+          countLines++;
+          line = words[i] + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+      textLine.push(line);
+      countLines++;
+
+      this.ctx.fillStyle = '#FFFFFF';
+      this.ctx.beginPath();
+      this.ctx.moveTo(WIDTH / 2 - wrapWidth / 2, wrapTop);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, wrapTop);
+      this.ctx.lineTo(WIDTH / 2 + wrapWidth / 2, wrapTop + lineHeight * countLines + 10);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2 - 15, wrapTop + lineHeight * countLines + 25);
+      this.ctx.lineTo(WIDTH / 2 - wrapWidth / 2, wrapTop);
+
+      this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.shadowOffsetX = 10;
+      this.ctx.shadowOffsetY = 10;
+      this.ctx.fill();
+      this.ctx.shadowOffsetX = 0;
+      this.ctx.shadowOffsetY = 0;
+
+      this.ctx.fillStyle = 'black';
+      this.ctx.textBaseline = 'hanging';
+
+      for (i = 0; i < countLines; i++) {
+        this.ctx.fillText(textLine[i], marginLeft, messageTop);
+        messageTop += lineHeight;
+      }
+    },
+
     /**
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
+      var messageWidth = 230;
+      var messageText;
+
       switch (this.state.currentStatus) {
-        case Verdict.WIN:
-          console.log('you have won!');
+        case Verdict.WIN: {
+          messageText = 'Я стал на шаг ближе к завоеванию мира! Ура!';
+          this.writeMessage(messageText, messageWidth);
           break;
-        case Verdict.FAIL:
-          console.log('you have failed!');
+        }
+
+        case Verdict.FAIL: {
+          messageText = 'Мое путешествие окончилось слишком рано... Попробуем еще раз? :)';
+          this.writeMessage(messageText, messageWidth);
           break;
-        case Verdict.PAUSE:
-          console.log('game is on pause!');
+        }
+        case Verdict.PAUSE: {
+          messageText = 'Иногда и мне нужен отдых! Сделай паузу - попей чайку!';
+          this.writeMessage(messageText, messageWidth);
           break;
-        case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
+        }
+        case Verdict.INTRO: {
+          messageText = 'Я умею перемещаться и летать по нажатию стрелки. А если нажать шифт, я выстрелю фейерболом. Жми пробел и поехали! А если захочешь отдохнуть, то смело жми эскейп';
+          this.writeMessage(messageText, messageWidth);
           break;
+        }
       }
     },
 
