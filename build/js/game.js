@@ -436,26 +436,22 @@
         case Verdict.WIN: {
           messageText = 'Я стал на шаг ближе к завоеванию мира! Ура!';
           this.writeMessage(messageText, messageWidth);
-          console.log('you have won!');
           break;
         }
 
         case Verdict.FAIL: {
           messageText = 'Мое путешествие окончилось слишком рано... Попробуем еще раз? :)';
           this.writeMessage(messageText, messageWidth);
-          console.log('you have failed!');
           break;
         }
         case Verdict.PAUSE: {
           messageText = 'Иногда и мне нужен отдых! Сделай паузу - попей чайку!';
           this.writeMessage(messageText, messageWidth);
-          console.log('game is on pause!');
           break;
         }
         case Verdict.INTRO: {
           messageText = 'Я умею перемещаться и летать по нажатию стрелки. А если нажать шифт, я выстрелю фейерболом. Жми пробел и поехали! А если захочешь отдохнуть, то смело жми эскейп';
           this.writeMessage(messageText, messageWidth);
-          console.log('welcome to the game! Press Space to start');
           break;
         }
       }
