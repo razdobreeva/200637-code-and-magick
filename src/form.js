@@ -6,6 +6,8 @@
   var formCloseButton = document.querySelector('.review-form-close');
 
   var marks = document.querySelector('.review-form-group-mark');
+  var mark1 = document.querySelector('#review-mark-1');
+  var mark2 = document.querySelector('#review-mark-2');
   var name = document.querySelector('#review-name');
   var text = document.querySelector('#review-text');
   var reviewFields = document.querySelector('.review-fields');
@@ -35,5 +37,13 @@
 
   text.oninput = function() {
     reviewFieldsText.classList.add('invisible');
+  };
+
+  marks.onchange = function() {
+    if (mark1.checked || mark2.checked) {
+      reviewFieldsText.classList.remove('invisible');
+    } else {
+      reviewFieldsText.classList.add('invisible');
+    }
   };
 })();
