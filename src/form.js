@@ -63,6 +63,7 @@
     } else {
       reviewFieldText.classList.add('invisible');
       if (name.value !== '') {
+        reviewFields.classList.add('invisible');
         submitButton.disabled = false;
       }
     }
