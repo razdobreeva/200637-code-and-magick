@@ -11,6 +11,8 @@
   var reviewFields = document.querySelector('.review-fields');
   var reviewFieldsName = document.querySelector('.review-fields-name');
   var reviewFieldsText = document.querySelector('.review-fields-text');
+  var submitButton = document.querySelector('.review-submit');
+
 
   //var reviewForm = document.querySelector('.overlay review-form');
   //var marks = reviewForm.elements.review-mark;
@@ -18,6 +20,7 @@
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
+    submitButton.disabled = true;
   };
 
   formCloseButton.onclick = function(evt) {
@@ -27,5 +30,9 @@
 
   name.oninput = function() {
     reviewFieldsName.classList.add('invisible');
+  };
+
+  text.oninput = function() {
+    reviewFieldsText.classList.add('invisible');
   };
 })();
