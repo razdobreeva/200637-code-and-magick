@@ -62,6 +62,9 @@
       submitButton.disabled = true;
     } else {
       reviewFieldText.classList.add('invisible');
+      if (name.value !== '') {
+        submitButton.disabled = false;
+      }
     }
   };
 })();
