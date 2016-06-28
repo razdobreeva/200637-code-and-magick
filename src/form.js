@@ -21,6 +21,7 @@
     evt.preventDefault();
     formContainer.classList.remove('invisible');
     submitButton.disabled = true;
+    reviewFieldsText.classList.add('invisible');
   };
 
   formCloseButton.onclick = function(evt) {
