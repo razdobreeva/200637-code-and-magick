@@ -33,10 +33,17 @@
 
   name.oninput = function() {
     reviewFieldsName.classList.add('invisible');
+    if (reviewFieldsText.classList.contains('invisible')) {
+      reviewFields.classList.add('invisible');
+      submitButton.disabled = false;
+    }
   };
 
   text.oninput = function() {
     reviewFieldsText.classList.add('invisible');
+    if (reviewFieldsName.classList.contains('invisible')) {
+      reviewFields.classList.add('invisible');
+      submitButton.disabled = false;
   };
 
   marks.onchange = function() {
