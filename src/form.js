@@ -11,19 +11,15 @@
   var name = document.querySelector('#review-name');
   var text = document.querySelector('#review-text');
   var reviewFields = document.querySelector('.review-fields');
-  var reviewFieldsName = document.querySelector('.review-fields-name');
-  var reviewFieldsText = document.querySelector('.review-fields-text');
+  var reviewFieldName = document.querySelector('.review-fields-name');
+  var reviewFieldText = document.querySelector('.review-fields-text');
   var submitButton = document.querySelector('.review-submit');
-
-
-  //var reviewForm = document.querySelector('.overlay review-form');
-  //var marks = reviewForm.elements.review-mark;
 
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
     submitButton.disabled = true;
-    reviewFieldsText.classList.add('invisible');
+    reviewFieldText.classList.add('invisible');
   };
 
   formCloseButton.onclick = function(evt) {
@@ -32,28 +28,40 @@
   };
 
   name.oninput = function() {
-    reviewFieldsName.classList.add('invisible');
-    if (reviewFieldsText.classList.contains('invisible')) {
-      reviewFields.classList.add('invisible');
-      submitButton.disabled = false;
+    if (name.value !== '') {
+      reviewFieldName.classList.add('invisible');
+      if (reviewFieldText.classList.contains('invisible')) {
+        reviewFields.classList.add('invisible');
+        submitButton.disabled = false;
+      }
+    } else {
+      reviewFields.classList.remove('invisible');
+      reviewFieldName.classList.remove('invisible');
+      submitButton.disabled = true;
     }
   };
 
   text.oninput = function() {
-    reviewFieldsText.classList.add('invisible');
-    if (reviewFieldsName.classList.contains('invisible')) {
-      reviewFields.classList.add('invisible');
-      submitButton.disabled = false;
+    if (text.value !== '') {
+      reviewFieldText.classList.add('invisible');
+      if (reviewFieldName.classList.contains('invisible')) {
+        reviewFields.classList.add('invisible');
+        submitButton.disabled = false;
+      }
+    } else {
+      reviewFields.classList.remove('invisible');
+      reviewFieldText.classList.remove('invisible');
+      submitButton.disabled = true;
     }
   };
 
   marks.onchange = function() {
     if (mark1.checked || mark2.checked) {
       reviewFields.classList.remove('invisible');
-      reviewFieldsText.classList.remove('invisible');
+      reviewFieldText.classList.remove('invisible');
       submitButton.disabled = true;
     } else {
-      reviewFieldsText.classList.add('invisible');
+      reviewFieldText.classList.add('invisible');
     }
   };
 })();
