@@ -44,6 +44,7 @@
     if (reviewFieldsName.classList.contains('invisible')) {
       reviewFields.classList.add('invisible');
       submitButton.disabled = false;
+    }
   };
 
   marks.onchange = function() {
