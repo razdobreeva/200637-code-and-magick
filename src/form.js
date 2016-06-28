@@ -49,7 +49,9 @@
 
   marks.onchange = function() {
     if (mark1.checked || mark2.checked) {
+      reviewFields.classList.remove('invisible');
       reviewFieldsText.classList.remove('invisible');
+      submitButton.disabled = true;
     } else {
       reviewFieldsText.classList.add('invisible');
     }
