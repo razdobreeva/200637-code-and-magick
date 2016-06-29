@@ -49,20 +49,17 @@
         submitButton.disabled = false;
       }
     } else {
-      if (!mark1.checked && !mark2.checked) {
-        //reviewFields.classList.remove('invisible');
-        //reviewFieldText.classList.remove('invisible');
+      if (mark1.checked || mark2.checked) {
+        reviewFields.classList.remove('invisible');
+        reviewFieldText.classList.remove('invisible');
+        submitButton.disabled = true;
+      } else {
         if (name.value !== '') {
           reviewFields.classList.add('invisible');
           submitButton.disabled = true;
         }
         reviewFieldText.classList.add('invisible');
-      } else {
-        reviewFields.classList.remove('invisible');
-        reviewFieldText.classList.remove('invisible');
-        submitButton.disabled = true;
       }
-      //submitButton.disabled = true;
     }
   };
 
