@@ -68,9 +68,11 @@
 
   marks.onchange = function() {
     if (mark1.checked || mark2.checked) {
-      reviewFields.classList.remove('invisible');
-      reviewFieldText.classList.remove('invisible');
-      submitButton.disabled = true;
+      if (text.value === '') {
+        reviewFields.classList.remove('invisible');
+        reviewFieldText.classList.remove('invisible');
+        submitButton.disabled = true;
+      }
     } else {
       reviewFieldText.classList.add('invisible');
       if (name.value !== '') {
