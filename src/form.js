@@ -34,7 +34,7 @@
         reviewFields.classList.add('invisible');
         submitButton.disabled = false;
       }
-    } else {
+    } else { // случай, когда пользователь набрал логин, но потом стер его
       reviewFields.classList.remove('invisible');
       reviewFieldName.classList.remove('invisible');
       submitButton.disabled = true;
