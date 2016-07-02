@@ -11,14 +11,14 @@
   var formName = document.querySelector('#review-name');
   var formText = document.querySelector('#review-text');
   var marks = document.querySelector('.review-form-group-mark');
-  var checkedMark = document.querySelector('input[name="review-mark"]:checked');
 
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
 
-    checkedMark.value = browserCookies.get('userMark');
+    var checkedMark = browserCookies.get('userMark') || 3;
     formName.value = browserCookies.get('userName');
+    document.querySelector('#review-mark-' + checkedMark).checked = true;
 
     console.log(browserCookies.get('userMark'));
     console.log(browserCookies.get('userName'));
@@ -33,6 +33,8 @@
 
   reviewForm.onsubmit = function(evt) {
     evt.preventDefault();
+
+    var checkedMark = document.querySelector('input[name="review-mark"]:checked');
 
     browserCookies.set('userMark', checkedMark.value, {
       expires: Date.now() + 10000000000
