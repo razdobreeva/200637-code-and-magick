@@ -16,6 +16,10 @@
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
+
+    checkedMark.value = browserCookies.get('userMark');
+    formName.value = browserCookies.get('userName');
+
     validateForm();
   };
 
