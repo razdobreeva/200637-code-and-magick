@@ -17,11 +17,8 @@
     formContainer.classList.remove('invisible');
 
     var checkedMark = browserCookies.get('userMark') || 3;
-    formName.value = browserCookies.get('userName');
     document.querySelector('#review-mark-' + checkedMark).checked = true;
-
-    console.log(browserCookies.get('userMark'));
-    console.log(browserCookies.get('userName'));
+    formName.value = browserCookies.get('userName');
 
     validateForm();
   };
@@ -37,14 +34,12 @@
     var checkedMark = document.querySelector('input[name="review-mark"]:checked');
 
     browserCookies.set('userMark', checkedMark.value, {
-      expires: Date.now() + 10000000000
+      expires: Date.now() + calculateDate()
     });
-    console.log(browserCookies.get('userMark'));
 
     browserCookies.set('userName', formName.value, {
-      expires: Date.now() + 10000000000
+      expires: Date.now() + calculateDate()
     });
-    console.log(browserCookies.get('userName'));
 
     this.submit();
   };
@@ -61,6 +56,20 @@
     validateForm();
   };
 })();
+
+function calculateDate() {
+  var date = new Date();
+  var birthDate = new Date(date.getFullYear(), 10, 28);
+  var lifetime = new Date();
+
+  if (Date.now() < birthDate) {
+    birthDate = new Date(date.getFullYear() - 1, 10, 28);
+    lifetime = Date.now() - birthDate;
+  } else {
+    lifetime = Date.now() - birthDate;
+  }
+  return lifetime;
+}
 
 function validateForm() {
   var checkedMark = document.querySelector('input[name="review-mark"]:checked');
