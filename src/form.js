@@ -1,15 +1,17 @@
 'use strict';
 
-var browserCookies = require('browser-cookies');
-
 (function() {
+  var browserCookies = require('browser-cookies');
+
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
+  var formSubmitButton = document.querySelector('review-submit');
 
   var formName = document.querySelector('#review-name');
   var formText = document.querySelector('#review-text');
   var marks = document.querySelector('.review-form-group-mark');
+  var checkedMark = document.querySelector('input[name="review-mark"]:checked');
 
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
@@ -20,6 +22,20 @@ var browserCookies = require('browser-cookies');
   formCloseButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.add('invisible');
+  };
+
+  formSubmitButton.onsubmit = function(evt) {
+    evt.preventDefault();
+
+    browserCookies.set('userMark', checkedMark.value, {
+      expires: Date.now() + 10000000
+    });
+
+    browserCookies.set('userName', formName.value, {
+      expires: Date.now() + 10000000
+    });
+
+    this.submit();
   };
 
   formName.oninput = function() {
