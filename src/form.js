@@ -6,7 +6,7 @@
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
-  var formSubmitButton = document.querySelector('review-submit');
+  var reviewForm = document.querySelector('.review-form');
 
   var formName = document.querySelector('#review-name');
   var formText = document.querySelector('#review-text');
@@ -20,6 +20,9 @@
     checkedMark.value = browserCookies.get('userMark');
     formName.value = browserCookies.get('userName');
 
+    console.log(browserCookies.get('userMark'));
+    console.log(browserCookies.get('userName'));
+
     validateForm();
   };
 
@@ -28,16 +31,18 @@
     formContainer.classList.add('invisible');
   };
 
-  formSubmitButton.onsubmit = function(evt) {
+  reviewForm.onsubmit = function(evt) {
     evt.preventDefault();
 
     browserCookies.set('userMark', checkedMark.value, {
-      expires: Date.now() + 10000000
+      expires: Date.now() + 10000000000
     });
+    console.log(browserCookies.get('userMark'));
 
     browserCookies.set('userName', formName.value, {
-      expires: Date.now() + 10000000
+      expires: Date.now() + 10000000000
     });
+    console.log(browserCookies.get('userName'));
 
     this.submit();
   };
