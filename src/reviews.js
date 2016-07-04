@@ -22,7 +22,7 @@ var getReviewElement = function(data, container) {
   element.querySelector('.review-author').title = data.author.name;
   element.querySelector('.review-rating').textContent = data.rating;
   element.querySelector('.review-text').textContent = data.description;
-  element.querySelector('.review-quiz').textContent = data.review_usefulness;
+  //element.querySelector('.review-quiz').textContent = data.review_usefulness;
 
   container.appendChild(element);
 
