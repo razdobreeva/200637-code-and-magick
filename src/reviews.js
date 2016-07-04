@@ -19,7 +19,7 @@ var getReviewElement = function(data, container) {
   var element = elementToClone.cloneNode(true);
   console.log(data);
 
-  element.querySelector('.review-author').textContent = data.author.name;
+  element.querySelector('.review-author').title = data.author.name;
   element.querySelector('.review-rating').textContent = data.rating;
   element.querySelector('.review-text').textContent = data.description;
   element.querySelector('.review-quiz').textContent = data.review_usefulness;
@@ -33,7 +33,7 @@ var getReviewElement = function(data, container) {
     clearTimeout(avatarLoadTimeout);
     avatar.style.width = 124;
     avatar.style.height = 124;
-    element.style.backgroundImage = 'url(\'' + evt.target.src + '\')';
+    element.querySelector('.review-author').src = evt.target.src;
   };
 
   avatar.onerror = function() {
