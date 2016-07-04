@@ -23,6 +23,8 @@ if ('content' in templateElement) {
   elementToClone = templateElement.querySelector('.review');
 }
 
+var IMAGE_LOAD_TIMEOUT = 10000;
+
 var getReviewElement = function(data, container) {
   var element = elementToClone.cloneNode(true);
   console.log(data);
@@ -35,8 +37,10 @@ var getReviewElement = function(data, container) {
   container.appendChild(element);
 
   var backgroundImage = new Image();
+  var backgroundLoadTimeout;
 
   backgroundImage.onload = function(evt) {
+    clearTimeout(backgroundLoadTimeout);
     this.width = 124;
     this.height = 124;
     element.style.backgroundImage = 'url(\'' + evt.target.src + '\')';
@@ -47,6 +51,11 @@ var getReviewElement = function(data, container) {
   };
 
   backgroundImage.src = data.author.picture;
+
+  backgroundLoadTimeout = setTimeout(function() {
+    backgroundImage.src = '';
+    element.classList.add('review-load-failure');
+  }, IMAGE_LOAD_TIMEOUT);
 
   return element;
 };
